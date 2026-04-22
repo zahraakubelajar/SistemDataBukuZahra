@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 // Node untuk menyimpan data buku
 class Node {
-    String kode, judul, penulis;
-    Node next;
+    String kode, judul, penulis; // atribut buku
+    Node next; // pointer ke node berikutnya
 
+    // constructor
     Node(String k, String j, String p) {
         kode = k;
         judul = j;
@@ -13,12 +14,12 @@ class Node {
     }
 }
 
-// Linked List
+// Class Linked List
 class LinkedList {
     Node head;
     int count = 0; // jumlah buku
 
-    // tambah buku di akhir
+    // menambah buku di akhir list
     void tambah(String k, String j, String p) {
         Node baru = new Node(k, j, p);
 
@@ -36,7 +37,7 @@ class LinkedList {
         System.out.println("Data berhasil ditambahkan!");
     }
 
-    // hapus buku terakhir
+    // menghapus buku terakhir
     void hapus() {
         if (head == null) {
             System.out.println("Tidak ada data untuk dihapus.");
@@ -57,7 +58,7 @@ class LinkedList {
         System.out.println("Data terakhir berhasil dihapus!");
     }
 
-    // cari buku
+    // mencari buku berdasarkan kode
     void cari(String kode) {
         Node temp = head;
 
@@ -75,7 +76,7 @@ class LinkedList {
         System.out.println("Buku tidak ditemukan.");
     }
 
-    // tampil semua buku
+    // menampilkan semua buku
     void tampil() {
         if (count < 5) {
             System.out.println("Minimal harus ada 5 buku!");
@@ -83,8 +84,8 @@ class LinkedList {
         }
 
         Node temp = head;
-
         System.out.println("Daftar Buku:");
+
         while (temp != null) {
             System.out.println("Kode: " + temp.kode +
                                " | Judul: " + temp.judul +
@@ -96,12 +97,12 @@ class LinkedList {
     }
 }
 
-// Main program
+// Class utama
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         LinkedList list = new LinkedList();
-        int pilih;
+        int pilih = 0; // variabel menu
 
         do {
             System.out.println("\n===== SISTEM DATA BUKU =====");
@@ -111,14 +112,17 @@ public class Main {
             System.out.println("4. Lihat Semua Buku");
             System.out.println("5. Keluar");
             System.out.print("Pilih menu: ");
+
             pilih = sc.nextInt();
             sc.nextLine();
 
             switch (pilih) {
                 case 1:
+                    // input data buku
                     System.out.print("Masukkan Kode Buku: ");
                     String kode = sc.nextLine();
 
+                    // validasi panjang kode
                     if (kode.length() > 5) {
                         System.out.println("Kode maksimal 5 karakter!");
                         break;
@@ -134,22 +138,25 @@ public class Main {
                     break;
 
                 case 2:
+                    // hapus buku terakhir
                     list.hapus();
                     break;
 
                 case 3:
+                    // cari buku
                     System.out.print("Masukkan kode yang dicari: ");
                     list.cari(sc.nextLine());
                     break;
 
                 case 4:
+                    // tampilkan semua buku
                     list.tampil();
                     break;
-
             }
 
         } while (pilih != 5);
 
         System.out.println("Program selesai.");
+        sc.close(); // menutup scanner
     }
 }
